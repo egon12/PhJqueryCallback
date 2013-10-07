@@ -5,19 +5,6 @@ $(function(){
     if (data.log) { 
       console.log(data.log); 
     }
-    if (data.jsprint) { 
-      //require jzebra
-      try {
-        var applet = document.jzebra;
-        applet.findPrinter();
-        applet.append(data.jsprint);
-        applet.append("\n\n\n\n\n\n\n\n\n\n"); //give some Space
-        applet.append("\x1bm"); //for cut
-        applet.print();
-      } catch (err) {
-        alert ("Error\nPrinter bermasalah:\n");
-      }
-    }
     if (data.alert) { 
       alert(data.alert); 
     }
@@ -57,4 +44,22 @@ $(function(){
       window.location = data.redirect
     }
   }
+
+  jQuery.fn.phpjquerycallback = function () {
+    return this.each(function () {
+      $(this).removeAttr('onsubmit')
+      .submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+          url      : $(this).attr('action'), 
+          data     : $(this).serialize(),
+          dataType : 'json',
+          success  : proccessPHPJQueryCallback,
+          error    : function (obj,stat) {
+            alert (stat + ":" + obj.responseText);
+          }
+        });
+      });
+    });
+  };
 });

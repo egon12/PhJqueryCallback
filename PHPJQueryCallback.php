@@ -1,38 +1,10 @@
 <?php
 
 /**
- *
- *
- * JSFeedback
+ * PHPJQueryCallback
  *
  * Use this library to create json object that will be use by jQuery ajax
- * the code for
  *
- * <code>
- *
- *  $.get( $(this).attr('action'),
- *	$(this).serialize(),	
- *	function (data) {
- *	    obj = $.parseJSON(data);
- *	    if (obj.log) {
- *		alert(obj.log);
- *	    }
- *	    if (obj.alert) {
- *		alert(obj.alert);
- *	    }
- *	    if (obj.focus) {
- *		selector = (obj.focus);
- *		$(selector).focus();
- *	    }
- *	    if (obj.clear) {
- *		$('form > input').val('');
- *		$('#no_nama > input').focus();
- *	    }
- *	});
- *
- * </code>
- *
- * 
  * @author Egon Firman<egon.firman@gmail.com>
  *
  */
@@ -45,15 +17,7 @@ class PHPJQueryCallback {
             $this->log = $msg."\n";
         }
     }
-
-    public function jsprint($msg) {
-        $this->jsprint = $msg;
-    }
-
-    public function alert($msg) {
-        $this->alert = $msg;
-    }
-
+    
     public function before($selector, $msg) {
         if (!isset($this->before)) {
             $this->before = array();
@@ -72,6 +36,10 @@ class PHPJQueryCallback {
         $b->selector = $selector;
         $b->msg = $msg;
         array_push($this->after, $b);
+    }
+
+    public function alert($msg) {
+        $this->alert = $msg;
     }
 
     public function html($selector, $msg) {
@@ -110,6 +78,9 @@ class PHPJQueryCallback {
 
     public function jseval ($script) {
         //$this->jseval = '<script type=text/javascript>';
+        if (!isset( $this->jseval)) {
+            $this->jseval = '';
+        }
         $this->jseval .= $script;
         //$this->jseval .= '</script>';
         $this->jseval = urlencode($this->jseval);
@@ -125,4 +96,5 @@ class PHPJQueryCallback {
         unset ($this);
         die();
     }
+
 }
