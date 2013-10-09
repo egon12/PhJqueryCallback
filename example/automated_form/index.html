@@ -1,0 +1,32 @@
+<html>
+  <meta charset="utf-8" />
+  <title>Automated Form</title>
+
+  <h1>Automated Form</h1>
+
+  <p>
+    Automated Form, when we fill name with something will know, the ajax will send it
+    To the server and return the instruction to fill the field. Fill it with Jane to see
+    How it work and fill it with another name to see..
+  </p>
+
+  <form action="add_edit.php" id="login_form" action="controller.php">
+    <h3>Login Form</h3>
+    <input id="name" type="text" name="name" placeholder="Name" data-url="check_name.php"/><br />
+    <input id="method" type="hidden" name="method" value="add"/>
+    <textarea id="address" name="address" placehoder="Address"></textarea><br />
+    <input id="city" name="city" placeholder="Password" /><br/>
+    <input id="phone" type="text" name="phone" placeholder="Phone Number" />
+    <button type="submit" name="submitButton">Submit</button>
+  </form>
+
+  <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+  <script src="js/phpjquery.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('#name').pjc_onChange();
+    });
+  </script>
+
+</html>
+

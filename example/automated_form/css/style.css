@@ -1,0 +1,18 @@
+.test-div
+{
+  width:30%;
+  min-height:100px;
+  border:solid 1px black;
+}
+#left-div
+{
+  display:inline-block
+}
+#center-div
+{
+  display:inline-block
+}
+#right-div
+{
+  display:inline-block
+}
