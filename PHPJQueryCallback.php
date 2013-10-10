@@ -18,6 +18,10 @@ class PHPJQueryCallback {
         }
     }
     
+    public function alert($msg) {
+        $this->alert = $msg;
+    }
+
     public function before($selector, $msg) {
         if (!isset($this->before)) {
             $this->before = array();
@@ -36,10 +40,6 @@ class PHPJQueryCallback {
         $b->selector = $selector;
         $b->msg = $msg;
         array_push($this->after, $b);
-    }
-
-    public function alert($msg) {
-        $this->alert = $msg;
     }
 
     public function html($selector, $msg) {
@@ -90,11 +90,40 @@ class PHPJQueryCallback {
         $this->redirect = $location;
     }
 
-    public function destroy() {
+    public function clone_appendTo($selector_from, $selector_to) {
+        if (!isset($this->clone_appendTo)) {
+            $this->clone_appendTo = array();
+        }
+        $b = new stdClass();
+        $b->selector_from = $selector_from;
+        $b->selector_to = $selector_to;
+        array_push($this->clone_appendTo, $b);
+    }
+
+    public function addClass($selector, $msg) {
+        if (isset ($this->addClass)) {
+            $this->addClass = array();
+        }
+        $b = new stdClass();
+        $b->selector = $selector;
+        $b->msg = $msg;
+        array_push($this->addClass, $b);
+    }
+
+    public function removeClass($selector, $msg) {
+        if (isset ($this->removeClass)) {
+            $this->removeClass = array();
+        }
+        $b = new stdClass();
+        $b->selector = $selector;
+        $b->msg = $msg;
+        array_push($this->removeClass, $b);
+    }
+
+    public function send() {
         header('Content-type: application/json; charset=utf-8');
         echo json_encode($this);
         unset ($this);
         die();
     }
-
 }

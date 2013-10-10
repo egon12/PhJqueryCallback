@@ -45,6 +45,10 @@ if (isset ($_GET['name']))
     } else {
         $callback->after('#name', $name.' is not existed');
 
+        $callback->val('#address', '');
+        $callback->val('#city', '');
+        $callback->val('#phone', '');
+
         $callback->val('#method' , 'add'); //change  hidden input val to add
 
         $callback->send();
