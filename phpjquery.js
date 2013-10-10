@@ -72,8 +72,9 @@ $(function(){
       if (this.tagName == 'FORM') {
         this.onsubmit = function(e) {
           $.ajax({ 
-            url      : this.action, 
+            url      : this.getAttribute('action'), 
             data     : $(this).serialize(),
+            type     : this.getAttribute('method'),
             dataType : 'json',
             success  : proccessPHPJQueryCallback,
             error    : function (obj,stat) {
@@ -89,7 +90,7 @@ $(function(){
         this.onchange = function(e) {
           console.log(e);
           $.ajax({ 
-            url      : this.dataset.url, 
+            url      : this.getAttribute('data-url'), 
             data     : $(this).serialize(),
             dataType : 'json',
             success  : proccessPHPJQueryCallback,

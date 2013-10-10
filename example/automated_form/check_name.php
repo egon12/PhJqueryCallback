@@ -6,7 +6,6 @@ require_once('lib/PHPJQueryCallback.php');
 // get name for array or write function to get data from database;
 function search($name) 
 {
-
     // The Data
     $people = array (
         'Jane' => array (
@@ -25,32 +24,20 @@ function search($name)
 // process it
 if (isset ($_GET['name'])) 
 {
-    $name = trim($_GET['name']);
 
     $callback = new PHPJQueryCallback();
-    $callback->log($name);
 
-
-    if ( $person_data = search($name) )   
+    if ( $person_data = search($_GET['name']) )   
     {
-
         foreach ($person_data as $key => $value) {
             $callback->val('#'.$key , $value); // set all data in ui
         }
-
-        $callback->val('#method' , 'edit'); // change hidden input val to edit
-
+        $callback->val('#method', 'edit');
         $callback->send(); // send it callback
 
     } else {
-        $callback->after('#name', $name.' is not existed');
-
-        $callback->val('#address', '');
-        $callback->val('#city', '');
-        $callback->val('#phone', '');
-
-        $callback->val('#method' , 'add'); //change  hidden input val to add
-
+        $callback->val('#method', 'add');
+        $callback->after('#name', $_GET['name'].' is not existed');
         $callback->send();
     }
 }
