@@ -35,22 +35,14 @@
         40, //down
       ];
 
-      var r = null;
 
       $('#country').keyup(function (e) {
         if ( ignoreKeys.indexOf(e.keyCode) == -1 ) {
 
-          if (r != null) {r.abort()}
-          $this = $(this);
-
-          url = $this.data('url');
-          query = $this.serialize();
+          $.getJSON ( $(this).data('url'), $(this).serialize(), function ( data ) {
+            $.processPHPJQueryCallback (data);
+          });
           
-          setTimeout( function () {
-            r = $.getJSON ( url, query, function ( data ) {
-              $.processPHPJQueryCallback (data);
-            });
-          }, 1300 );
         } 
       });
     });
