@@ -102,4 +102,7 @@ $(function(){
       }
     });
   };
+
+    
+  jQuery.processPHPJQueryCallback = proccessPHPJQueryCallback;
 });

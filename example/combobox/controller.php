@@ -45,7 +45,7 @@ if (isset($_GET['country'])) {
     foreach ($countries as $country) {
         if (strpos(strtolower($country), strtolower($_GET['country'])) !== false) {
             $callback->append('#country-list', '<option value="'.$country.'">');
-            $callback->log('<option value="'.$country.'">');
+            //$callback->log('<option value="'.$country.'">');
         }
     }
 
