@@ -40,6 +40,11 @@ $(function(){
     if (data.focus) { 
       $(data.focus).focus(); 
     }
+    if (data.attr) {
+      for (i=0;i<data.attr.length;i++) {
+        $(data.attr[i].selector).attr(data.attr[i].attr, data.attr[i].msg);
+      }
+    }
     if (data.jseval) {
       jseval = decodeURIComponent ((data.jseval +'').replace(/\+/g, '%20'))
         eval (jseval);
@@ -88,7 +93,6 @@ $(function(){
       // if its an input
       else if (this.tagName == 'INPUT' || this.tagName == 'TEXTAREA' ) {
         this.onchange = function(e) {
-          console.log(e);
           $.ajax({ 
             url      : this.getAttribute('data-url'), 
             data     : $(this).serialize(),

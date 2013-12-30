@@ -76,6 +76,17 @@ class PHPJQueryCallback {
         $this->focus = $selector;
     }
 
+    public function attr($selector, $attr, $msg) {
+        if (!isset($this->val)) {
+            $this->val = array();
+        } 
+        $b = new stdClass();
+        $b->selector = $selector;
+        $b->attr = $attr;
+        $b->msg = $msg;
+        array_push($this->val, $b);
+    }
+
     public function jseval ($script) {
         //$this->jseval = '<script type=text/javascript>';
         if (!isset( $this->jseval)) {
