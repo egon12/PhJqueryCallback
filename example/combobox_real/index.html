@@ -1,0 +1,64 @@
+<html>
+  <meta charset="utf-8" />
+  <title>Real Combo Box</title>
+
+  <h1>Real Combo Box</h1>
+
+  <p>
+    I build this because I need the real combobox that works and can be used
+    in Production level. It has some abort but it's still not perfect though.
+    Maybe I need to understand how JQuery ajax abort works
+  </p>
+
+  <form action="controller.php" method="post" id="country_form" autocomplete="off">
+    <h3>Type Country</h3>
+    <input id="country" type="text" name="country" placeholder="country" list="country-list" data-url="controller.php" autocomplete="off"/><br />
+    <datalist id="country-list">
+    </datalist>
+    <button type="submit" name="submitButton" value="submit">Submit</button>
+  </form>
+
+  <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+  <script src="js/phpjquery.js" type="text/javascript"></script> 
+  <script type="text/javascript">
+    $(function () {
+
+      var ignoreKeys = [
+        13, //enter
+        33, //pgup
+        34, //pgdn
+        35, //home
+        36, //end
+        37, //left
+        38, //up
+        39, //right
+        40, //down
+      ];
+
+      var r = null;
+
+      $('#country').keyup(function (e) {
+        if ( ignoreKeys.indexOf(e.keyCode) == -1 ) {
+          clearTimeout(r);
+
+          $this = $(this);
+
+          if ($this.val() == '') {
+            return;
+          }
+
+          url = $this.data('url');
+          query = $this.serialize();
+          
+          r = setTimeout( function () {
+            $.getJSON ( url, query, function ( data ) {
+              $.processPHPJQueryCallback (data);
+            });
+          }, 300 );
+        } 
+      });
+    });
+  </script>
+
+</html>
+
