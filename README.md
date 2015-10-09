@@ -1,4 +1,4 @@
-PHPJqueryCallback
+PhJqueryCallback
 =================
 
 Call jquery from php with ajax
